@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tik-tok-tea-short</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* height: 100vh; */
+            background-color: #669999;
+        }
+
+        input {
+            width: 100px;
+            height: 100px;
+            display: block;
+            background-color: gainsboro;
+            font-size: 80px;
+            margin: 5px;
+            border: 1px solid grey;
+        }
+
+        .game_part {
+            margin-top: 50px;
+            border: 1px solid wheat;
+            padding: 50px;
+        }
+        .game_part h1{
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .restart {
+            padding: 10px 35px;
+            background-color: chocolate;
+            border: 1px solid chocolate;
+            color: white;
+            font-size: 18px;
+            margin: 0 auto;
+            display: block;
+            margin-top: 30px;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+
+        .restart:hover {
+            background-color: rgba(243, 214, 194, 0.529);
+            color: chocolate;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game_part">
+        <h1>Tic-Tac-Toe Game</h1>
+        <table>
+            <tr>
+                <td><input type="button" id="a1" value="" onclick="tic_val(this)"></td>
+                <td><input type="button" id="a2" value="" onclick="tic_val(this)"></td>
+                <td><input type="button" id="a3" value="" onclick="tic_val(this)"></td>
+            </tr>
+            <tr>
+                <td><input type="button" id="a4" value="" onclick="tic_val(this)"></td>
+                <td><input type="button" id="a5" value="" onclick="tic_val(this)"></td>
+                <td><input type="button" id="a6" value="" onclick="tic_val(this)"></td>
+            </tr>
+            <tr>
+                <td><input type="button" id="a7" value="" onclick="tic_val(this)"></td>
+                <td><input type="button" id="a8" value="" onclick="tic_val(this)"></td>
+                <td><input type="button" id="a9" value="" onclick="tic_val(this)"></td>
+            </tr>
+            <tr>
+                <td colspan="3" align="center"><h1 id="text"></h1></td>
+           </tr>
+           <tr>
+                <td colspan="3" align="center"><button onclick="res()" class="restart">Reset</button></td>
+           </tr>
+        </table>
+        
+    </div>
+
+
+    <script>
+
+        // Function to write X or 0
+        cnt=1
+          function tic_val(n){
+               a=document.getElementById(n.id).value
+               if(a==''){
+                    if(cnt%2==0){
+                         document.getElementById(n.id).value='0'
+                         document.getElementById(n.id).style.color='red'
+                    }
+                    else{
+                         document.getElementById(n.id).value='x'
+                         document.getElementById(n.id).style.color='green'
+                    }
+
+               }
+               cnt++
+               win()
+          }
+
+          function win(){
+               a1=document.getElementById('a1').value
+               a2=document.getElementById('a2').value
+               a3=document.getElementById('a3').value
+               a4=document.getElementById('a4').value
+               a5=document.getElementById('a5').value
+               a6=document.getElementById('a6').value
+               a7=document.getElementById('a7').value
+               a8=document.getElementById('a8').value
+               a9=document.getElementById('a9').value
+
+               if(a1=='x' && a2=='x' && a3=='x' || 
+                  a4=='x' && a5=='x' && a6=='x' ||
+                  a7=='x' && a8=='x' && a9=='x' ||
+                  a1=='x' && a4=='x' && a7=='x' ||
+                  a2=='x' && a5=='x' && a8=='x' ||
+                  a3=='x' && a6=='x' && a9=='x' ||
+                  a1=='x' && a5=='x' && a9=='x' ||
+                  a3=='x' && a5=='x' && a7=='x' 
+               ){
+                    document.getElementById('text').innerHTML='"X" IS WINNER !!!😎'
+                    dis()
+               }
+               else if(a1=='0' && a2=='0' && a3=='0' || 
+                  a4=='0' && a5=='0' && a6=='0' ||
+                  a7=='0' && a8=='0' && a9=='0' ||
+                  a1=='0' && a4=='0' && a7=='0' ||
+                  a2=='0' && a5=='0' && a8=='0' ||
+                  a3=='0' && a6=='0' && a9=='0' ||
+                  a1=='0' && a5=='0' && a9=='0' ||
+                  a3=='0' && a5=='0' && a7=='0' 
+               ){
+                    document.getElementById('text').innerHTML='"0" IS WINNER !!!😎'
+                    dis()
+               }
+               else if((a1=='x' || a1=='0') && 
+                       (a2=='x' || a2=='0') &&
+                       (a3=='x' || a3=='0') &&
+                       (a4=='x' || a4=='0') &&
+                       (a5=='x' || a5=='0') &&
+                       (a6=='x' || a6=='0') &&
+                       (a7=='x' || a7=='0') &&
+                       (a8=='x' || a8=='0') &&
+                       (a9=='x' || a9=='0')
+               ){
+                    document.getElementById('text').innerHTML= 'MATCH IS DRAW !!!🤦‍♂️'
+                    dis()
+               }
+          }
+
+          function dis(){
+               x = document.getElementsByTagName('input')
+               for(i=0;i<x.length;i++){
+                    x[i].disabled=true
+               }
+          }
+
+          function res(){
+               document.getElementById('text').innerHTML=''
+               x = document.getElementsByTagName('input')
+               for(i=0;i<x.length;i++){
+                    x[i].disabled=false
+                    x[i].value=''
+               }
+          }
+
+    </script>
+</body>
+
+</html>

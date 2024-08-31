@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tik-tok-tea</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* height: 100vh; */
+            background-color: #D8F284;
+        }
+
+        input {
+            width: 100px;
+            height: 100px;
+            display: block;
+            background-color: gainsboro;
+            font-size: 80px;
+            margin: 5px;
+            border: 1px solid grey;
+        }
+
+        .game_part {
+            border: 1px solid gray;
+            padding: 100px;
+        }
+
+        .restart {
+            padding: 10px 35px;
+            background-color: chocolate;
+            border: 1px solid chocolate;
+            color: white;
+            font-size: 18px;
+            margin: 0 auto;
+            display: block;
+            margin-top: 30px;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+
+        .restart:hover {
+            background-color: rgba(243, 214, 194, 0.529);
+            color: chocolate;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game_part">
+        <table>
+            <tr>
+                <td><input type="button" id="a1" value="" onclick="tic_val(this)"></td>
+                <td><input type="button" id="a2" value="" onclick="tic_val(this)"></td>
+                <td><input type="button" id="a3" value="" onclick="tic_val(this)"></td>
+            </tr>
+            <tr>
+                <td><input type="button" id="a4" value="" onclick="tic_val(this)"></td>
+                <td><input type="button" id="a5" value="" onclick="tic_val(this)"></td>
+                <td><input type="button" id="a6" value="" onclick="tic_val(this)"></td>
+            </tr>
+            <tr>
+                <td><input type="button" id="a7" value="" onclick="tic_val(this)"></td>
+                <td><input type="button" id="a8" value="" onclick="tic_val(this)"></td>
+                <td><input type="button" id="a9" value="" onclick="tic_val(this)"></td>
+            </tr>
+        </table>
+        <button class="restart" onclick="clear1()">Restart</button>
+        <h1 id="final"></h1>
+        <h1 id="final1"></h1>
+        <h1 id="final2"></h1>
+    </div>
+
+
+    <script>
+
+        // Function to write X or 0
+        a = 1
+        function tic_val(s) {
+            if (a <= 9) {
+                if (a % 2 == 0) {
+                    document.getElementById(s.id).value = '0'
+                    document.getElementById(s.id).style.color = 'red'
+                    document.getElementById(s.id).disabled = 'true'
+                }
+                else {
+                    document.getElementById(s.id).value = 'x'
+                    document.getElementById(s.id).style.color = 'green'
+                    document.getElementById(s.id).disabled = 'true'
+                }
+                a++
+                if (win()) {
+
+                }
+            }
+        }
+
+        // Function to true position
+        function win() {
+            a1 = document.getElementById('a1').value
+            a2 = document.getElementById('a2').value
+            a3 = document.getElementById('a3').value
+            a4 = document.getElementById('a4').value
+            a5 = document.getElementById('a5').value
+            a6 = document.getElementById('a6').value
+            a7 = document.getElementById('a7').value
+            a8 = document.getElementById('a8').value
+            a9 = document.getElementById('a9').value
+
+
+            if (a1 == 'x' && a2 == 'x' && a3 == 'x' || a4 == 'x' && a5 == 'x' && a6 == 'x' || a7 == 'x' && a8 == 'x' && a9 == 'x' ||
+                a1 == 'x' && a4 == 'x' && a7 == 'x' || a2 == 'x' && a5 == 'x' && a8 == 'x' || a3 == 'x' && a9 == 'x' && a6 == 'x' ||
+                a1 == 'x' && a5 == 'x' && a9 == 'x' || a3 == 'x' && a5 == 'x' && a7 == 'x'){
+
+                document.getElementById('final').innerHTML = '"X" IS WINNER !!!😎'
+                document.getElementById('final').style.textAlign = 'center'
+                document.getElementById('final').style.marginTop = '20px'
+            }
+            else if (a1 == '0' && a2 == '0' && a3 == '0' || a4 == '0' && a5 == '0' && a6 == '0' || a7 == '0' && a8 == '0' && a9 == '0' ||
+                a1 == '0' && a4 == '0' && a7 == '0' || a2 == '0' && a5 == '0' && a8 == '0' || a3 == '0' && a9 == '0' && a6 == '0' ||
+                a1 == '0' && a5 == '0' && a9 == '0' || a3 == '0' && a5 == '0' && a7 == '0'){
+
+                document.getElementById('final1').innerHTML = '"0" IS WINNER !!!😎'
+                document.getElementById('final1').style.textAlign = 'center'
+                document.getElementById('final1').style.marginTop = '20px'
+            }
+            else if ((a1 == 'x' || a1 == '0') && (a2 == 'x' || a2 == '0') && (a3 == 'x' || a3 == '0') && (a4 == 'x' || a4 == '0')
+                && (a5 == 'x' || a5 == '0') && (a6 == 'x' || a6 == '0') && (a7 == 'x' || a7 == '0') && (a8 == 'x' || a8 == '0') 
+                && (a9 == 'x' || a9 == '0')){
+
+                document.getElementById('final2').innerHTML = 'MATCH IS DRAW !!!🤦‍♂️'
+                document.getElementById('final2').style.textAlign = 'center'
+                document.getElementById('final2').style.marginTop = '20px'
+            }
+            else {
+                return false
+            }
+        }
+
+        // Function to reset game
+        function clear1() {
+            location.reload();
+            document.getElementById(s.id).value = '';
+        }
+
+    </script>
+</body>
+
+</html>
